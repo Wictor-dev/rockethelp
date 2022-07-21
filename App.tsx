@@ -7,6 +7,7 @@ import { Loading } from './src/components/loading';
 import { Home } from './src/screens/Home';
 import { Register } from './src/screens/Register';
 import { AppRoutes } from './src/routes/app.routes';
+import { Routes } from './src/routes';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -17,7 +18,7 @@ export default function App() {
   return (
     <NativeBaseProvider theme={THEME}>
       <StatusBar barStyle='light-content' backgroundColor="transparent" translucent />
-      {fontsLoaded ? <AppRoutes /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </NativeBaseProvider>
   );
 }

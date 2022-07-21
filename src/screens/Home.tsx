@@ -6,6 +6,10 @@ import Logo from '../assets/logo_secondary.svg'
 import { Button } from '../components/Button';
 import { Filter } from '../components/Filter';
 import { Order, OrderProps } from '../components/Order';
+
+import auth from "@react-native-firebase/auth"
+import { Alert } from 'react-native';
+
 export function Home() {
     const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open')
     const [orders, setOrders] = useState<OrderProps[]>([])
@@ -18,6 +22,15 @@ export function Home() {
 
     function handleOpenDetails(orderId: string){
         navigation.navigate('details', {orderId})
+    }
+
+    function handleLogOut(){
+        auth()
+        .signOut()
+        .catch(error => {
+            console.log(error)
+            Alert.alert("Sair", "Não foi possível sair.")
+        })
     }
 
     const { colors } = useTheme()
@@ -37,6 +50,7 @@ export function Home() {
 
                 <IconButton
                     icon={<SignOut size={26} color={colors.gray[300]} />}
+                    onPress={handleLogOut}
                 />
             </HStack>
 
